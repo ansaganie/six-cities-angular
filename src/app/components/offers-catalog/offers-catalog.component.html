@@ -1,0 +1,11 @@
+<section class="cities__places places">
+  <h2 class="visually-hidden">Places</h2>
+  <strong class="places__found">312 places to stay in Amsterdam</strong>
+  <app-offers-sorting></app-offers-sorting>
+
+  <p *ngIf="offersService.getIsLoading()">Loading...</p>
+  <app-offers-list
+    *ngIf="offersService.getOffers().length"
+    [offers]="offersService.getOffers()"
+  ></app-offers-list>
+</section>

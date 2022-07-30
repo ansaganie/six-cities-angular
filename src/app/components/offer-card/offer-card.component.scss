@@ -1,0 +1,151 @@
+.place-card {
+  position: relative;
+}
+
+.place-card:hover {
+  opacity: 0.6;
+}
+
+.place-card__image-wrapper {
+  margin-bottom: 9px;
+}
+
+.place-card__image {
+  display: block;
+  border-radius: 4px;
+}
+
+.place-card__info {
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.place-card__price-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.place-card__price {
+  margin-right: 20px;
+}
+
+.favorites__card .place-card__bookmark-button {
+  margin-top: 0;
+  -webkit-transform: skew(10deg);
+  transform: skew(10deg);
+}
+
+.place-card__bookmark-button {
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 18px;
+  height: 19px;
+  margin-top: 2px;
+}
+
+.place-card__bookmark-button:focus .place-card__bookmark-icon,
+.place-card__bookmark-button:hover .place-card__bookmark-icon {
+  stroke: #4481c3;
+}
+
+.place-card__bookmark-button--active .place-card__bookmark-icon {
+  stroke: #4481c3;
+  fill: #4481c3;
+}
+
+.place-card__bookmark-icon {
+  fill: none;
+  stroke: #979797;
+  stroke-width: 2;
+  -webkit-transition: fill 0.3s, stroke 0.3s;
+  transition: fill 0.3s, stroke 0.3s;
+}
+
+.place-card__price-value {
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.place-card__price-text {
+  font-size: 12px;
+  line-height: 1.1667;
+}
+
+.place-card__rating {
+  margin-bottom: 6px;
+}
+
+.place-card__stars {
+  width: 73px;
+  height: 12px;
+}
+
+.place-card__stars::before {
+  width: 73px;
+  background-size: 73px 12px;
+}
+
+.place-card__stars span {
+  width: 0%;
+}
+
+.place-card__stars span::before {
+  width: 73px;
+  background-size: 73px 12px;
+}
+
+.place-card__name {
+  margin-top: 0;
+  margin-bottom: 4px;
+  font-size: 18px;
+  line-height: 1.223;
+  font-weight: 700;
+  font-style: oblique;
+}
+
+.place-card__name a {
+  display: inline-block;
+}
+
+.place-card__name a:focus,
+.place-card__name a:hover {
+  opacity: 0.7;
+}
+
+.place-card__type {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 12px;
+  line-height: 1.1667;
+}
+
+.place-card__mark {
+  position: absolute;
+  top: -5px;
+  left: -3px;
+  padding: 5px 15px 5px 9px;
+  font-size: 12px;
+  line-height: 1.1667;
+  font-weight: 700;
+  color: #fff;
+  background-color: #4481c3;
+  -webkit-transform: skew(-10deg);
+  transform: skew(-10deg);
+  border-radius: 3px;
+}
+
+.place-card__mark span {
+  display: block;
+  -webkit-transform: skew(10deg);
+  transform: skew(10deg);
+}
