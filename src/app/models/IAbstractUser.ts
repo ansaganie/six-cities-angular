@@ -3,8 +3,8 @@ export type UserId = string;
 interface IAbstractUser {
   id: UserId;
   name: string;
-  avatarUrl: string;
-  isPro: boolean;
+  avatar_url: string;
+  is_pro: boolean;
 }
 
 export default IAbstractUser;

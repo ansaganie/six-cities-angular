@@ -10,8 +10,20 @@
         <ul class="header__nav-list">
           <ng-container *ngIf="getAuthorized()">
             <li class="header__nav-item user">
-              <a class="header__nav-link header__nav-link--profile" href="#">
-                <div class="header__avatar-wrapper user__avatar-wrapper"></div>
+              <a
+                class="header__nav-link header__nav-link--profile"
+                href="#"
+                routerLink="/favorites"
+              >
+                <div class="header__avatar-wrapper user__avatar-wrapper">
+                  <img
+                    class="user__avatar"
+                    alt="User's avatar"
+                    width="20"
+                    height="20"
+                    [src]="getCurrentUser()?.avatar_url"
+                  >
+                </div>
                 <span class="header__user-name user__name">
                   {{ getCurrentUser()?.email }}
                 </span>
