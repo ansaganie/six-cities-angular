@@ -2,6 +2,7 @@
   class="login__form form"
   (submit)="handleFormSubmit()"
   [formGroup]="loginForm"
+  autocomplete="on"
 >
   <div class="login__input-wrapper form__input-wrapper">
     <label class="visually-hidden">E-mail</label>
@@ -12,6 +13,7 @@
       name="email"
       formControlName="email"
       placeholder="Email"
+      autocomplete="email"
       required
     >
   </div>
@@ -24,9 +26,14 @@
       name="password"
       formControlName="password"
       placeholder="Password"
+      autocomplete="current-password"
       required
     >
   </div>
 
-  <button class="login__submit form__submit button" type="submit">Sign in</button>
+  <button
+    class="login__submit form__submit button"
+    type="submit"
+    [disabled]="loginForm.disabled"
+  >Sign in</button>
 </form>

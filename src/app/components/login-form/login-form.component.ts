@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import ILoginForm from 'src/app/models/ILoginForm';
+import { AuthorizationService } from '../../services/authorization.service';
 
 const PASSWORD_PATTERN = /^.*(?=.{2,})(?=.*\d)(?=.*[a-zA-Z]).*$/i;
 const EMAIL_REQUIRED = 'No email provided';
@@ -28,11 +32,30 @@ export class LoginFormComponent {
   emailErrorMessage = '';
   passwordErrorMessage = '';
 
+  constructor(
+    private authorizationService: AuthorizationService,
+    private router: Router,
+  ){}
+
   handleFormSubmit() {
     this.validateForm();
 
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
+      const loginForm: ILoginForm = {
+        email: this.loginForm.value.email || '',
+        password: this.loginForm.value.password || '',
+      }
+      this.loginForm.disable();
+
+      this.authorizationService.login(loginForm).subscribe({
+          complete: () => {
+            this.router.navigateByUrl('/');
+          },
+          error: (error) => {
+            alert(error.error.error);
+            this.loginForm.enable();
+          },
+        });
     }
   }
 
