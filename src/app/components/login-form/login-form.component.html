@@ -1,0 +1,32 @@
+<form
+  class="login__form form"
+  (submit)="handleFormSubmit()"
+  [formGroup]="loginForm"
+>
+  <div class="login__input-wrapper form__input-wrapper">
+    <label class="visually-hidden">E-mail</label>
+    <p class='error'>{{emailErrorMessage}}</p>
+    <input
+      class="login__input form__input"
+      type="email"
+      name="email"
+      formControlName="email"
+      placeholder="Email"
+      required
+    >
+  </div>
+  <div class="login__input-wrapper form__input-wrapper">
+    <label class="visually-hidden">Password</label>
+    <p class='error'>{{passwordErrorMessage}}</p>
+    <input
+      class="login__input form__input"
+      type="password"
+      name="password"
+      formControlName="password"
+      placeholder="Password"
+      required
+    >
+  </div>
+
+  <button class="login__submit form__submit button" type="submit">Sign in</button>
+</form>
