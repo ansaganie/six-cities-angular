@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import IOffer from '../models/IOffer';
+import { TokenService } from './token.service';
+import { tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +14,16 @@ export class OffersService {
 
   constructor(
     private http: HttpClient,
+    private tokenService: TokenService
   ) {}
 
   loadOffers(): void {
+    const token = this.tokenService.getToken() || '';
     this.isLoading = true;
-    this.http.get<IOffer[]>(`${environment.apiUrl}/hotels`).subscribe((data) => {
+
+    this.http.get<IOffer[]>(`${environment.apiUrl}/hotels`, {
+      headers: new HttpHeaders({ ['x-token']: token })
+    }).subscribe((data) => {
       this.offers = data;
       this.isLoading = false
     });
@@ -31,5 +38,17 @@ export class OffersService {
 
   getIsLoading() {
     return this.isLoading;
+  }
+
+  toggleFavorite(offer: IOffer) {
+    const newState = Number(!offer.is_favorite);
+    const token = this.tokenService.getToken() || '';
+
+    return this.http.post<IOffer>(`${environment.apiUrl}/favorite/${offer.id}/${newState}`, {}, {
+      headers: new HttpHeaders({ ['x-token']: token })
+    }).pipe(tap((data) => {
+      const index = this.offers.findIndex(({id}) => id === offer.id);
+      this.offers.splice(index, 1, data);
+    }));
   }
 }
