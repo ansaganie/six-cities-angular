@@ -8,6 +8,7 @@ import { OffersCatalogComponent } from './components/offers-catalog/offers-catal
 import { OffersListComponent } from './components/offers-list/offers-list.component';
 import { OffersSortingComponent } from './components/offers-sorting/offers-sorting.component';
 import { OfferCardComponent } from './components/offer-card/offer-card.component';
+import { TabsComponent } from './components/tabs/tabs.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { OfferCardComponent } from './components/offer-card/offer-card.component
     OffersCatalogComponent,
     OffersListComponent,
     OffersSortingComponent,
-    OfferCardComponent
+    OfferCardComponent,
+    TabsComponent
   ],
   imports: [
     BrowserModule,

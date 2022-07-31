@@ -22,8 +22,11 @@ export class OffersService {
     });
   }
 
-  getOffers(sortFunction = (_a: IOffer, _b: IOffer) => 0) {
-    return [...this.offers].sort(sortFunction);
+  getOffers({
+    sortFunc = (_a: IOffer, _b: IOffer) => 0,
+    filterFunc = (_value: IOffer, _index: number, _array: IOffer[]) => true
+  }) {
+    return [...this.offers].filter(filterFunc).sort(sortFunc);
   }
 
   getIsLoading() {

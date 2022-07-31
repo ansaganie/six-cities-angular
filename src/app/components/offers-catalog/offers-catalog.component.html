@@ -1,6 +1,8 @@
 <section class="cities__places places">
   <h2 class="visually-hidden">Places</h2>
-  <strong class="places__found">{{getOffers().length}} places to stay in Amsterdam</strong>
+  <strong class="places__found">
+    {{getOffers().length}} places to stay in {{getCurrentCityName()}}
+  </strong>
   <app-offers-sorting></app-offers-sorting>
 
   <p *ngIf="offersService.getIsLoading()">Loading...</p>

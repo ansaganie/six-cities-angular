@@ -18,6 +18,13 @@ export class OffersCatalogComponent implements OnInit {
   }
 
   getOffers() {
-    return this.offersService.getOffers(OffersSorter[this.mainPageService.getCurrentSortType()]);
+    return this.offersService.getOffers({
+      sortFunc: OffersSorter[this.mainPageService.getCurrentSortType()],
+      filterFunc: ({ city }) => city.name === this.mainPageService.getCurrentCityName()
+    });
+  }
+
+  getCurrentCityName() {
+    return this.mainPageService.getCurrentCityName();
   }
 }
