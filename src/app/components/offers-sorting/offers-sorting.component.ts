@@ -4,8 +4,7 @@ import { MainPageService } from '../../services/main-page.service';
 
 @Component({
   selector: 'app-offers-sorting',
-  templateUrl: './offers-sorting.component.html',
-  styleUrls: ['./offers-sorting.component.scss']
+  templateUrl: './offers-sorting.component.html'
 })
 export class OffersSortingComponent{
   isShown = false;

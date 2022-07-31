@@ -17,7 +17,7 @@ export class OffersService {
     private tokenService: TokenService
   ) {}
 
-  loadOffers(): void {
+  loadOffers() {
     const token = this.tokenService.getToken() || '';
     this.isLoading = true;
 
@@ -26,6 +26,15 @@ export class OffersService {
     }).subscribe((data) => {
       this.offers = data;
       this.isLoading = false
+    });
+  }
+
+  loadFavorites() {
+    const token = this.tokenService.getToken() || '';
+    this.isLoading = true;
+
+    return this.http.get<IOffer[]>(`${environment.apiUrl}/favorite`, {
+      headers: new HttpHeaders({ ['x-token']: token })
     });
   }
 

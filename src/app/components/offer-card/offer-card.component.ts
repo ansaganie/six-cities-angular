@@ -9,8 +9,7 @@ const MAX_RATING_VALUE = 5;
 
 @Component({
   selector: 'app-offer-card',
-  templateUrl: './offer-card.component.html',
-  styleUrls: ['./offer-card.component.scss']
+  templateUrl: './offer-card.component.html'
 })
 export class OfferCardComponent {
   @Input() offer!: IOffer;

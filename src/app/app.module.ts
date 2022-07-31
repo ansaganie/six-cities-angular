@@ -15,6 +15,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LogoutComponent } from './pages/logout/logout.component';
+import { FavoritesComponent } from './pages/favorites/favorites.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { LogoutComponent } from './pages/logout/logout.component';
     LoginComponent,
     HeaderComponent,
     LoginFormComponent,
-    LogoutComponent
+    LogoutComponent,
+    FavoritesComponent
   ],
   imports: [
     BrowserModule,
