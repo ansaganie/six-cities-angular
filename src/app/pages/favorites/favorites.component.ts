@@ -13,7 +13,8 @@ const MAX_RATING_VALUE = 5;
   templateUrl: './favorites.component.html'
 })
 export class FavoritesComponent implements OnInit {
-  offersMap: Record<string, IOffer[]> = {};
+  isOffersLoading = false;
+  togglingOffers = new Set<string>();
 
   constructor(
     private offersService: OffersService,
@@ -26,11 +27,26 @@ export class FavoritesComponent implements OnInit {
       this.router.navigateByUrl('/login');
     }
 
-    this.offersService.loadFavorites().subscribe((data) => {
-      data.forEach((offer) => {
-        this.offersMap[offer.city.name] = [...this.offersMap[offer.city.name] || [], offer];
-      });
-    })
+    this.isOffersLoading = true;
+    this.offersService.loadFavorites().subscribe(() => {
+      this.isOffersLoading = false;
+    });
+  }
+
+  getOffersMap() {
+    return this.offersService.getFavoriteOffers();
+  }
+
+  handleBookmarkClick(offer: IOffer) {
+    this.togglingOffers.add(offer.id);
+    this.offersService.toggleFavorite(offer).subscribe({
+      complete: () => {
+        this.togglingOffers.delete(offer.id);
+      },
+      error: () => {
+        alert('Sorry, item was not added to favorites');
+      }
+    });
   }
 
   getAccommodationType(type: string){

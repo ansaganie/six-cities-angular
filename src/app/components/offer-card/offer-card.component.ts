@@ -42,6 +42,5 @@ export class OfferCardComponent {
     } else {
       alert('Only authorized users can bookmark offers. Please login first');
     }
-
   }
 }

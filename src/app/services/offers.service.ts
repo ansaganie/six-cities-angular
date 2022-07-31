@@ -9,7 +9,8 @@ import { tap } from 'rxjs';
   providedIn: 'root'
 })
 export class OffersService {
-  private offers: IOffer[] = [];
+  private offersMap: Record<string, IOffer> = {};
+  private favoriteOfferIds = new Set<string>();
   private isLoading = false;
 
   constructor(
@@ -24,25 +25,36 @@ export class OffersService {
     this.http.get<IOffer[]>(`${environment.apiUrl}/hotels`, {
       headers: new HttpHeaders({ ['x-token']: token })
     }).subscribe((data) => {
-      this.offers = data;
+      data.forEach((offer) => this.offersMap[offer.id] = offer);
       this.isLoading = false
     });
   }
 
   loadFavorites() {
     const token = this.tokenService.getToken() || '';
-    this.isLoading = true;
 
     return this.http.get<IOffer[]>(`${environment.apiUrl}/favorite`, {
       headers: new HttpHeaders({ ['x-token']: token })
-    });
+    }).pipe(tap((data) => data.forEach((offer) => {
+      this.favoriteOfferIds.add(offer.id);
+      this.offersMap[offer.id] = offer;
+    })))
   }
 
   getOffers({
     sortFunc = (_a: IOffer, _b: IOffer) => 0,
     filterFunc = (_value: IOffer, _index: number, _array: IOffer[]) => true
   }) {
-    return [...this.offers].filter(filterFunc).sort(sortFunc);
+    return [...Object.values(this.offersMap)].filter(filterFunc).sort(sortFunc);
+  }
+
+  getFavoriteOffers() {
+    return [...Object.values(this.offersMap)]
+      .filter(({id}) => this.favoriteOfferIds.has(id))
+      .reduce((acc, offer) => {
+        acc[offer.city.name] = [...acc[offer.city.name] || [], offer];
+        return acc;
+      }, {} as Record<string, IOffer[]>);
   }
 
   getIsLoading() {
@@ -56,8 +68,13 @@ export class OffersService {
     return this.http.post<IOffer>(`${environment.apiUrl}/favorite/${offer.id}/${newState}`, {}, {
       headers: new HttpHeaders({ ['x-token']: token })
     }).pipe(tap((data) => {
-      const index = this.offers.findIndex(({id}) => id === offer.id);
-      this.offers.splice(index, 1, data);
+      this.offersMap[offer.id] = data;
+
+      if (newState) {
+        this.favoriteOfferIds.add(offer.id);
+      } else {
+        this.favoriteOfferIds.delete(offer.id);
+      }
     }));
   }
 }
