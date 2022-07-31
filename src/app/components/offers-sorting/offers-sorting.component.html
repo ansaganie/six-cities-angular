@@ -1,15 +1,26 @@
 <form class="places__sorting" action="#" method="get">
-  <span class="places__sorting-caption">Sort by</span>
-  <span class="places__sorting-type" tabindex="0">
-    Popular
+  <span
+    class="places__sorting-caption"
+    [ngStyle]="{marginRight: '5px'}"
+  >Sort by</span>
+  <span class="places__sorting-type" tabindex="0" (click)="isShown = !isShown">
+    {{getCurrentSortType()}}
     <svg class="places__sorting-arrow" width="7" height="4">
-      <use xlink:href="#icon-arrow-select"></use>
+      <use xlink:href="#icon-arrow-select"/>
     </svg>
   </span>
-  <ul class="places__options places__options--custom places__options--opened">
-    <li class="places__option places__option--active" tabindex="0">Popular</li>
-    <li class="places__option" tabindex="0">Price: low to high</li>
-    <li class="places__option" tabindex="0">Price: high to low</li>
-    <li class="places__option" tabindex="0">Top rated first</li>
+  <ul
+    class="places__options places__options--custom"
+    [ngClass]="{'places__options--opened': isShown}"
+  >
+    <li
+      *ngFor="let sortType of getSortTypes()"
+      class="places__option"
+      [ngClass]="{'places__option--active': sortType === getCurrentSortType()}"
+      (click)="handleChoose(sortType)"
+      tabindex="0"
+    >
+      {{sortType}}
+    </li>
   </ul>
 </form>

@@ -7,8 +7,8 @@ import IOffer from '../models/IOffer';
   providedIn: 'root'
 })
 export class OffersService {
-  offers: IOffer[] = [];
-  isLoading = false;
+  private offers: IOffer[] = [];
+  private isLoading = false;
 
   constructor(
     private http: HttpClient,
@@ -22,8 +22,8 @@ export class OffersService {
     });
   }
 
-  getOffers() {
-    return this.offers;
+  getOffers(sortFunction = (_a: IOffer, _b: IOffer) => 0) {
+    return [...this.offers].sort(sortFunction);
   }
 
   getIsLoading() {
