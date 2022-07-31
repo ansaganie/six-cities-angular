@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ReviewsService } from '../../services/reviews.service';
+import { AuthorizationService } from '../../services/authorization.service';
 
 const MAX_RATING_WIDTH = 100;
 const MAX_RATING_VALUE = 5;
@@ -13,7 +14,8 @@ export class ReviewsComponent implements OnInit {
   isLoading = false;
 
   constructor(
-    private reviewsService: ReviewsService
+    private reviewsService: ReviewsService,
+    private authorizationService: AuthorizationService
   ) {}
 
   ngOnInit(): void {
@@ -23,6 +25,10 @@ export class ReviewsComponent implements OnInit {
 
   get reviews() {
     return this.reviewsService.getReviews(this.offerId);
+  }
+
+  get authorized() {
+    return this.authorizationService.getAuthorized();
   }
 
   getRatingString(rating: number) {
