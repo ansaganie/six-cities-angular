@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AccommodationType } from 'src/app/constants/accommodation-type';
 import { OffersService } from 'src/app/services/offers.service';
-import { AuthorizationService } from '../../services/authorization.service';
+import { UserService } from '../../services/user.service';
 
 const MAX_RATING_WIDTH = 100;
 const MAX_RATING_VALUE = 5;
@@ -19,7 +19,7 @@ export class PropertyComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private offersService: OffersService,
-    private authorizationService: AuthorizationService
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -35,7 +35,7 @@ export class PropertyComponent implements OnInit {
   }
   
   handleBookmarkClick() {
-    if (this.authorizationService.getAuthorized()) {
+    if (this.userService.getAuthorized()) {
       this.isToggling = true;
       this.offersService.toggleFavorite(this.offer).subscribe({
         complete: () => {

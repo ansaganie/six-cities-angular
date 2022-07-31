@@ -2,7 +2,8 @@ import { Component, Input } from '@angular/core';
 import IOffer from 'src/app/models/IOffer';
 import {AccommodationType} from 'src/app/constants/accommodation-type';
 import { OffersService } from '../../services/offers.service';
-import { AuthorizationService } from '../../services/authorization.service';
+import { UserService } from 'src/app/services/user.service';
+
 
 const MAX_RATING_WIDTH = 100;
 const MAX_RATING_VALUE = 5;
@@ -16,7 +17,7 @@ export class OfferCardComponent {
   isToggling = false;
 
   constructor(
-    private authorizationService: AuthorizationService,
+    private userService: UserService,
     private offersService: OffersService,
   ){}
 
@@ -29,7 +30,7 @@ export class OfferCardComponent {
   }
 
   handleBookmarkClick() {
-    if (this.authorizationService.getAuthorized()) {
+    if (this.userService.getAuthorized()) {
       this.isToggling = true;
       this.offersService.toggleFavorite(this.offer).subscribe({
         complete: () => {

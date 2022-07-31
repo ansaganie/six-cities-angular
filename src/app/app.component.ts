@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthorizationService } from './services/authorization.service';
+import { UserService } from './services/user.service';
+
 
 @Component({
   selector: 'app-root',
@@ -9,14 +10,14 @@ export class AppComponent implements OnInit {
   isInitializing = true;
 
   constructor(
-    private authorizationService: AuthorizationService
+    private userService: UserService
   ){}
 
   ngOnInit(): void {
-    this.authorizationService.check()
+    this.userService.check()
       .subscribe({
         error: () => {
-          this.authorizationService.logout();
+          this.userService.logout();
         }
       }).add(() => {
         this.isInitializing = false;

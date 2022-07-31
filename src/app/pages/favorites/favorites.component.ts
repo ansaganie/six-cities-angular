@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import IOffer from 'src/app/models/IOffer';
-import { OffersService } from 'src/app/services/offers.service';
-import { AuthorizationService } from '../../services/authorization.service';
 import { Router } from '@angular/router';
+
+import IOffer from 'src/app/models/IOffer';
 import { AccommodationType } from 'src/app/constants/accommodation-type';
+
+import { OffersService } from 'src/app/services/offers.service';
+import { UserService } from 'src/app/services/user.service';
+
 
 const MAX_RATING_WIDTH = 100;
 const MAX_RATING_VALUE = 5;
@@ -18,12 +21,12 @@ export class FavoritesComponent implements OnInit {
 
   constructor(
     private offersService: OffersService,
-    private authorizationService: AuthorizationService,
+    private userService: UserService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    if (!this.authorizationService.getAuthorized()) {
+    if (!this.userService.getAuthorized()) {
       this.router.navigateByUrl('/login');
     }
 

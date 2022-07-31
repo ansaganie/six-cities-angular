@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthorizationService } from '../../services/authorization.service';
+import { UserService } from 'src/app/services/user.service';
+
 
 @Component({
   selector: 'app-header',
@@ -7,14 +8,14 @@ import { AuthorizationService } from '../../services/authorization.service';
 })
 export class HeaderComponent {
   constructor(
-    private authorizationService: AuthorizationService
+    private userService: UserService
   ){}
 
   getAuthorized() {
-    return this.authorizationService.getAuthorized();
+    return this.userService.getAuthorized();
   }
 
   getCurrentUser() {
-    return this.authorizationService.getCurrentUser();
+    return this.userService.getCurrentUser();
   }
 }

@@ -10,9 +10,10 @@ import { TokenService } from './token.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthorizationService {
+export class UserService {
   private authorized = false;
   private currentUser: IUser | null = null;
+  private favoriteOffers = new Set<string>();
 
   constructor(
     private httpClint: HttpClient,
@@ -35,6 +36,7 @@ export class AuthorizationService {
     this.tokenService.dropToken();
     this.authorized = false;
     this.currentUser = null;
+    this.favoriteOffers.clear();
   }
 
   check() {
@@ -67,5 +69,17 @@ export class AuthorizationService {
 
   setCurrentUser(user: IUser | null) {
     this.currentUser = user;
+  }
+
+  addFavoriteOfferId(offerId: string) {
+    this.favoriteOffers.add(offerId);
+  }
+
+  deleteFavoriteOfferId(offerId: string) {
+    this.favoriteOffers.delete(offerId);
+  }
+
+  favoriteOfferIdHas(offerId: string) {
+    return this.favoriteOffers.has(offerId);
   }
 }

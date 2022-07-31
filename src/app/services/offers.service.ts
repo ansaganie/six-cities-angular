@@ -5,18 +5,20 @@ import {environment} from '../../environments/environment';
 
 import IOffer from '../models/IOffer';
 import { TokenService } from './token.service';
+import { UserService } from './user.service';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class OffersService {
   private offersMap: Record<string, IOffer> = {};
-  private favoriteOfferIds = new Set<string>();
   private isLoading = false;
 
   constructor(
     private http: HttpClient,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private userService: UserService
   ) {}
 
   loadOffers() {
@@ -45,7 +47,7 @@ export class OffersService {
     return this.http.get<IOffer[]>(`${environment.apiUrl}/favorite`, {
       headers: new HttpHeaders({ ['x-token']: token })
     }).pipe(tap((data) => data.forEach((offer) => {
-      this.favoriteOfferIds.add(offer.id);
+      this.userService.addFavoriteOfferId(offer.id);
       this.offersMap[offer.id] = offer;
     })))
   }
@@ -77,7 +79,7 @@ export class OffersService {
 
   getFavoriteOffers() {
     return [...Object.values(this.offersMap)]
-      .filter(({id}) => this.favoriteOfferIds.has(id))
+      .filter(({id}) => this.userService.favoriteOfferIdHas(id))
       .reduce((acc, offer) => {
         acc[offer.city.name] = [...acc[offer.city.name] || [], offer];
         return acc;
@@ -98,9 +100,9 @@ export class OffersService {
       this.offersMap[offer.id] = data;
 
       if (newState) {
-        this.favoriteOfferIds.add(offer.id);
+        this.userService.addFavoriteOfferId(offer.id);
       } else {
-        this.favoriteOfferIds.delete(offer.id);
+        this.userService.deleteFavoriteOfferId(offer.id);
       }
     }));
   }
