@@ -19,6 +19,7 @@ import { FavoritesComponent } from './pages/favorites/favorites.component';
 import { PropertyComponent } from './pages/property/property.component';
 import { ReviewsComponent } from './components/reviews/reviews.component';
 import { ReviewsFormComponent } from './components/reviews-form/reviews-form.component';
+import { NeighbourhoodComponent } from './components/neighbourhood/neighbourhood.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ReviewsFormComponent } from './components/reviews-form/reviews-form.com
     FavoritesComponent,
     PropertyComponent,
     ReviewsComponent,
-    ReviewsFormComponent
+    ReviewsFormComponent,
+    NeighbourhoodComponent
   ],
   imports: [
     BrowserModule,

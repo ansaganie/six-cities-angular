@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AccommodationType } from 'src/app/constants/accommodation-type';
 import { OffersService } from 'src/app/services/offers.service';
+import { AuthorizationService } from '../../services/authorization.service';
 
 const MAX_RATING_WIDTH = 100;
 const MAX_RATING_VALUE = 5;
@@ -17,7 +18,8 @@ export class PropertyComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private offersService: OffersService
+    private offersService: OffersService,
+    private authorizationService: AuthorizationService
   ) { }
 
   ngOnInit(): void {
@@ -33,15 +35,19 @@ export class PropertyComponent implements OnInit {
   }
   
   handleBookmarkClick() {
-    this.isToggling = true;
-    this.offersService.toggleFavorite(this.offer).subscribe({
-      complete: () => {
-        this.isToggling = false;
-      },
-      error: () => {
-        alert('Sorry, item was not added to favorites');
-      }
-    });
+    if (this.authorizationService.getAuthorized()) {
+      this.isToggling = true;
+      this.offersService.toggleFavorite(this.offer).subscribe({
+        complete: () => {
+          this.isToggling = false;
+        },
+        error: () => {
+          alert('Sorry, item was not added to favorites');
+        }
+      });
+    } else {
+      alert('Only authorized users can bookmark offers. Please login first');
+    }
   }
 
   getAccommodationType(type: string){

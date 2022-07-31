@@ -29,7 +29,7 @@ export class ReviewsService {
   }
 
   getReviews(offerId: string) {
-    return this.reviewsMap[offerId];
+    return this.reviewsMap[offerId] || [];
   }
 
   postReview(offerId: string, reviewForm: IReviewForm) {

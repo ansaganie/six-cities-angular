@@ -1,5 +1,7 @@
 <section class="property__reviews reviews">
-  <h2 class="reviews__title">Reviews &middot; <span class="reviews__amount">{{reviews.length}}</span></h2>
+  <h2 class="reviews__title">
+    Reviews &middot; <span class="reviews__amount">{{reviews.length || 0}}</span>
+  </h2>
   <ul class="reviews__list">
     <li class="reviews__item" *ngFor="let review of reviews">
       <div class="reviews__user user">

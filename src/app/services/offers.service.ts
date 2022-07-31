@@ -36,11 +36,7 @@ export class OffersService {
 
     return this.http.get<IOffer>(`${environment.apiUrl}/hotels/${offerId}`, {
       headers: new HttpHeaders({ ['x-token']: token })
-    }).pipe(tap((data) => {
-      console.log(data);
-      
-      this.offersMap[offerId] = data;
-    }));
+    }).pipe(tap((data) => this.offersMap[offerId] = data));
   }
 
   loadFavorites() {
@@ -52,6 +48,20 @@ export class OffersService {
       this.favoriteOfferIds.add(offer.id);
       this.offersMap[offer.id] = offer;
     })))
+  }
+
+  loadNeibourhood(offerId: string) {
+    const token = this.tokenService.getToken() || '';
+
+    return this.http.get<IOffer[]>(`${environment.apiUrl}/hotels/${offerId}/nearby`, {
+      headers: new HttpHeaders({ ['x-token']: token })
+    }).pipe(tap((data) => {
+      data.forEach((offer) => {
+        this.offersMap[offer.id] = offer;
+      })
+
+      return data;
+    }))
   }
 
   getOffers({
