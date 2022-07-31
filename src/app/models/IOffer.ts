@@ -8,8 +8,8 @@ interface IOffer {
   id: OfferId;
   bedrooms: number;
   description: string;
-  goods: Record<number, string>;
-  images: Record<number, string>;
+  goods: string[];
+  images: string[];
   is_favorite: boolean;
   is_premium: boolean;
   max_adults: number;

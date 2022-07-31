@@ -54,6 +54,6 @@ export class FavoritesComponent implements OnInit {
   }
 
   getRatingString(rating: number) {
-    return `${((Math.trunc(rating) * MAX_RATING_WIDTH) / MAX_RATING_VALUE)}%`
+    return `${((Math.round(rating) * MAX_RATING_WIDTH) / MAX_RATING_VALUE)}%`
   }
 }

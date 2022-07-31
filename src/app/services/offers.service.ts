@@ -30,6 +30,18 @@ export class OffersService {
     });
   }
 
+  loadOffer(offerId: string) {
+    const token = this.tokenService.getToken() || '';
+
+    return this.http.get<IOffer>(`${environment.apiUrl}/hotels/${offerId}`, {
+      headers: new HttpHeaders({ ['x-token']: token })
+    }).pipe(tap((data) => {
+      console.log(data);
+      
+      this.offersMap[offerId] = data;
+    }));
+  }
+
   loadFavorites() {
     const token = this.tokenService.getToken() || '';
 
@@ -46,6 +58,10 @@ export class OffersService {
     filterFunc = (_value: IOffer, _index: number, _array: IOffer[]) => true
   }) {
     return [...Object.values(this.offersMap)].filter(filterFunc).sort(sortFunc);
+  }
+
+  getOffer(offerId: string) {
+    return this.offersMap[offerId];
   }
 
   getFavoriteOffers() {

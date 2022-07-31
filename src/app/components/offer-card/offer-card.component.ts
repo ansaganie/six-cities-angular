@@ -25,7 +25,7 @@ export class OfferCardComponent {
   }
 
   getRatingString() {
-    return `${((Math.trunc(this.offer.rating) * MAX_RATING_WIDTH) / MAX_RATING_VALUE)}%`
+    return `${((Math.round(this.offer.rating) * MAX_RATING_WIDTH) / MAX_RATING_VALUE)}%`
   }
 
   handleBookmarkClick() {

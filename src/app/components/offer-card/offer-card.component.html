@@ -3,7 +3,7 @@
     <span>Premium</span>
   </div>
   <div class="cities__image-wrapper place-card__image-wrapper">
-    <a href="#">
+    <a [routerLink]="['/offer', offer.id]">
       <img
         class="place-card__image"
         [src]="offer.preview_image"
@@ -41,7 +41,7 @@
       </div>
     </div>
     <h2 class="place-card__name">
-      <a href="#">{{offer.title}}</a>
+      <a [routerLink]="['/offer', offer.id]">{{offer.title}}</a>
     </h2>
     <p class="place-card__type">{{getAccommodationType()}}</p>
   </div>
