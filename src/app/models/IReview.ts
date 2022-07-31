@@ -2,7 +2,7 @@ import IAbstractUser from './IAbstractUser';
 
 interface IReview {
   comment: string;
-  date: Date;
+  date: string;
   id: string;
   rating: number;
   user: IAbstractUser;

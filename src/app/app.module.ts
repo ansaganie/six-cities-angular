@@ -17,6 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LogoutComponent } from './pages/logout/logout.component';
 import { FavoritesComponent } from './pages/favorites/favorites.component';
 import { PropertyComponent } from './pages/property/property.component';
+import { ReviewsComponent } from './components/reviews/reviews.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { PropertyComponent } from './pages/property/property.component';
     LoginFormComponent,
     LogoutComponent,
     FavoritesComponent,
-    PropertyComponent
+    PropertyComponent,
+    ReviewsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { tap } from 'rxjs';
 import {environment} from '../../environments/environment';
+
 import IOffer from '../models/IOffer';
 import { TokenService } from './token.service';
-import { tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

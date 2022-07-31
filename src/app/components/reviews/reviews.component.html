@@ -1,0 +1,37 @@
+<section class="property__reviews reviews">
+  <h2 class="reviews__title">Reviews &middot; <span class="reviews__amount">{{reviews.length}}</span></h2>
+  <ul class="reviews__list">
+    <li class="reviews__item" *ngFor="let review of reviews">
+      <div class="reviews__user user">
+        <div class="reviews__avatar-wrapper user__avatar-wrapper">
+          <img
+            class="reviews__avatar user__avatar"
+            [src]="review.user.avatar_url"
+            width="54"
+            height="54"
+            alt="Reviews avatar"
+          >
+        </div>
+        <span class="reviews__user-name">
+          {{review.user.name}}
+        </span>
+      </div>
+      <div class="reviews__info">
+        <div class="reviews__rating rating">
+          <div class="reviews__stars rating__stars">
+            <span
+              [ngStyle]="{'width': getRatingString(review.rating)}"
+            ></span>
+            <span class="visually-hidden">Rating</span>
+          </div>
+        </div>
+        <p class="reviews__text">
+          {{review.comment}}
+        </p>
+        <time class="reviews__time" [dateTime]="review.date | date: 'shortDate'">
+          {{review.date | date: 'longDate' }}
+        </time>
+      </div>
+    </li>
+  </ul>
+</section>
