@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { tap } from 'rxjs';
 
 import ILoginForm from '../models/ILoginForm';
@@ -29,6 +29,28 @@ export class AuthorizationService {
         this.currentUser = data;
       })
     );
+  }
+
+  logout() {
+    this.tokenService.dropToken();
+    this.authorized = false;
+    this.currentUser = null;
+  }
+
+  check() {
+    const token = this.tokenService.getToken() || '';
+  
+    return this.httpClint.get<IUser>(
+      `${environment.apiUrl}/login`,
+      {
+        headers: new HttpHeaders({
+          ['x-token']: token
+        })
+      }
+    ).pipe(tap((data) => {
+      this.authorized = true;
+      this.currentUser = data;
+    }));
   }
 
   getAuthorized() {
