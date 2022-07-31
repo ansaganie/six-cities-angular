@@ -9,6 +9,9 @@ import { OffersListComponent } from './components/offers-list/offers-list.compon
 import { OffersSortingComponent } from './components/offers-sorting/offers-sorting.component';
 import { OfferCardComponent } from './components/offer-card/offer-card.component';
 import { TabsComponent } from './components/tabs/tabs.component';
+import { MainComponent } from './pages/main/main.component';
+import { LoginComponent } from './pages/login/login.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import { TabsComponent } from './components/tabs/tabs.component';
     OffersListComponent,
     OffersSortingComponent,
     OfferCardComponent,
-    TabsComponent
+    TabsComponent,
+    MainComponent,
+    LoginComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

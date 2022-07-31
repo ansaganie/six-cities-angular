@@ -1,4 +1,4 @@
-import { Token } from '../store/app-slice/types';
+import { Token } from '../types/token';
 import IAbstractUser from './IAbstractUser';
 
 interface IUser extends IAbstractUser {
