@@ -1,10 +1,13 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import IOffer from 'src/app/models/IOffer';
 import { OffersService } from 'src/app/services/offers.service';
+import { OfferCardComponent } from '../offer-card/offer-card.component';
 
 @Component({
   selector: 'app-neighbourhood',
   templateUrl: './neighbourhood.component.html',
+  imports: [CommonModule, OfferCardComponent],
 })
 export class NeighbourhoodComponent implements OnInit {
   @Input() offerId!: string;

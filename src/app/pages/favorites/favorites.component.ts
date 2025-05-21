@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 import IOffer from 'src/app/models/IOffer';
 import { AccommodationType } from 'src/app/constants/accommodation-type';
 
 import { OffersService } from 'src/app/services/offers.service';
 import { UserService } from 'src/app/services/user.service';
+import { CommonModule, NgClass, NgStyle } from '@angular/common';
+import { HeaderComponent } from '../../components/header/header.component';
 
 
 const MAX_RATING_WIDTH = 100;
@@ -13,7 +15,8 @@ const MAX_RATING_VALUE = 5;
 
 @Component({
   selector: 'app-favorites',
-  templateUrl: './favorites.component.html'
+  templateUrl: './favorites.component.html',
+  imports: [CommonModule, HeaderComponent, RouterLink, NgClass, NgStyle],
 })
 export class FavoritesComponent implements OnInit {
   isOffersLoading = false;

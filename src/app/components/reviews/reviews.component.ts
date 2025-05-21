@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { ReviewsService } from '../../services/reviews.service';
+import { CommonModule, DatePipe, NgStyle } from '@angular/common';
+import { ReviewsFormComponent } from '../reviews-form/reviews-form.component';
 
 
 const MAX_RATING_WIDTH = 100;
@@ -9,6 +11,7 @@ const MAX_RATING_VALUE = 5;
 @Component({
   selector: 'app-reviews',
   templateUrl: './reviews.component.html',
+  imports: [ReviewsFormComponent, CommonModule, NgStyle, DatePipe],
 })
 export class ReviewsComponent implements OnInit {
   @Input() offerId!: string;

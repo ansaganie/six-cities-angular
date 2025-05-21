@@ -3,6 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { AccommodationType } from 'src/app/constants/accommodation-type';
 import { OffersService } from 'src/app/services/offers.service';
 import { UserService } from '../../services/user.service';
+import { CommonModule, NgClass, NgStyle } from '@angular/common';
+import { HeaderComponent } from '../../components/header/header.component';
+import { ReviewsComponent } from '../../components/reviews/reviews.component';
+import { NeighbourhoodComponent } from '../../components/neighbourhood/neighbourhood.component';
 
 const MAX_RATING_WIDTH = 100;
 const MAX_RATING_VALUE = 5;
@@ -10,6 +14,7 @@ const MAX_RATING_VALUE = 5;
 @Component({
   selector: 'app-property',
   templateUrl: './property.component.html',
+  imports: [CommonModule, HeaderComponent, NgClass, NgStyle, ReviewsComponent, NeighbourhoodComponent],
 })
 export class PropertyComponent implements OnInit {
   isLoading = false;
@@ -33,7 +38,7 @@ export class PropertyComponent implements OnInit {
   get offer() {
     return this.offersService.getOffer(this.offerId);
   }
-  
+
   handleBookmarkClick() {
     if (this.userService.getAuthorized()) {
       this.isToggling = true;

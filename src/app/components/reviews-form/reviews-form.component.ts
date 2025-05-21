@@ -1,11 +1,13 @@
 import { Component, Input } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import IReviewForm from 'src/app/models/IReviewForm';
 import { ReviewsService } from '../../services/reviews.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-reviews-form',
   templateUrl: './reviews-form.component.html',
+  imports: [CommonModule, ReactiveFormsModule],
 })
 export class ReviewsFormComponent {
   @Input() offerId!: string;

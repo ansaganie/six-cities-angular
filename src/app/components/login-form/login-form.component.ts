@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormGroupDirective, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import ILoginForm from 'src/app/models/ILoginForm';
@@ -16,7 +16,8 @@ const PASSWORD_MATCH = 'Password should contain minimum one Latin letter and one
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
-  styleUrls: ['./login-form.component.scss']
+  styleUrls: ['./login-form.component.scss'],
+  imports: [ReactiveFormsModule],
 })
 export class LoginFormComponent {
   loginForm = new FormGroup({
@@ -63,7 +64,7 @@ export class LoginFormComponent {
   validateForm() {
     const email = this.loginForm.controls.email;
     const password = this.loginForm.controls.password;
-    
+
     if (email.invalid) {
       if (email.errors?.['required']) {
         this.emailErrorMessage = EMAIL_REQUIRED;
